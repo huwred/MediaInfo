@@ -1,14 +1,16 @@
-﻿using Umbraco.Core;
-using Umbraco.Core.Composing;
+﻿using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Notifications;
 
 namespace MediaInfo.Compose
 {
-    [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    public class MediaInfoComposer : IUserComposer
+
+    public class MediaInfoComposer : IComposer
     {
-        public void Compose(Composition composition)
+
+        public void Compose(IUmbracoBuilder builder)
         {
-            composition.Components().Append<MediaInfoComponent>();
+            builder.AddNotificationHandler<ServerVariablesParsingNotification,ServerVariablesParsingNotificationHandler>();
         }
     }
 }

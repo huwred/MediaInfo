@@ -43,7 +43,7 @@
                 });
 
                 if (latDegrees != '' && lngDegrees != '' && latRef != '' && lngRef != '') {
-                    var mapUrl = 'https://www.google.com/maps/place/' + latDegrees + latRef + '+' + lngDegrees + lngRef;
+                    var mapUrl = 'https://www.google.com/maps/place/' + latDegrees + latRef + '+' + lngDegrees.replace(/\-/g, '') + lngRef;
                     $scope.mapUrl = mapUrl;
                 }
             });

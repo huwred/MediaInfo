@@ -1,49 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Umbraco.Core.Composing;
-using Umbraco.Web;
-using Umbraco.Web.JavaScript;
 using MediaInfo.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Events;
+using Umbraco.Cms.Core.Notifications;
+using Umbraco.Extensions;
 
 namespace MediaInfo.Compose
 {
-    public class MediaInfoComponent : IComponent
+
+    public class ServerVariablesParsingNotificationHandler : INotificationHandler<ServerVariablesParsingNotification>
     {
-        public void Initialize()
-        {
-            ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
-        }
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUrlHelperFactory _urlHelperFactory;
+        private readonly UmbracoApiControllerTypeCollection _apiControllers;
+        private readonly IActionContextAccessor _actionContextAccessor;
 
-        public void Terminate()
+        //LinkGenerator _linkGenerator;
+        public ServerVariablesParsingNotificationHandler(IHttpContextAccessor httpContextAccessor,UmbracoApiControllerTypeCollection apiControllers,IUrlHelperFactory urlHelperFactory,IActionContextAccessor actionContextAccessor)
         {
-        }
+            _httpContextAccessor = httpContextAccessor;
+            _urlHelperFactory = urlHelperFactory;
+            _apiControllers = apiControllers;
+            _actionContextAccessor = actionContextAccessor;
 
-        private void ServerVariablesParser_Parsing(object sender, Dictionary<string, object> e)
+        }
+        public void Handle(ServerVariablesParsingNotification notification)
         {
-            if (HttpContext.Current == null)
+            if (_httpContextAccessor.HttpContext == null)
             {
                 throw new InvalidOperationException("HttpContext is null");
             }
+            var urlHelper = _urlHelperFactory.GetUrlHelper(_actionContextAccessor.ActionContext);
 
-            var urlHelper =
-                new UrlHelper(
-                    new RequestContext(
-                        new HttpContextWrapper(
-                            HttpContext.Current),
-                        new RouteData()));
-
-            if (!e.ContainsKey("MediaInfo"))
-                e.Add("MediaInfo", new Dictionary<string, object>
+            notification.ServerVariables.Add("MediaInfo", new Dictionary<string, object>
+            {
                 {
-                    {
-                        "MediaInfoApiUrl",
-                        urlHelper.GetUmbracoApiServiceBaseUrl<MediaInfoBackofficeApiController>(
-                            controller => controller.GetFileInfo(new MediaInfoBackofficeApiController.ApiInstruction { ImageUrl = string.Empty }))
-                    }
-                });
+                    "MediaInfoApiUrl",
+                    urlHelper.GetUmbracoApiServiceBaseUrl<MediaInfoBackofficeApiController>(_apiControllers,
+                        controller => controller.GetFileInfo(new MediaInfoBackofficeApiController.ApiInstruction { ImageUrl = string.Empty }))
+                }
+            });
+
         }
     }
+
 }
+
