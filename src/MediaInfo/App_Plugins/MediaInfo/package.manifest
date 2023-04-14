@@ -1,4 +1,7 @@
 ﻿{
+  "name": "MediaInfo",
+  "version": "10",
+  "allowPackageTelemetry": true,
   "contentApps": [
     {
       "name": "Media Info",
@@ -11,10 +14,10 @@
       ]
     }
   ],
-    "javascript": [
-        "~/App_Plugins/MediaInfo/js/main.controller.js"
-    ],
-    "css": [
-        "~/App_Plugins/MediaInfo/css/style.css"
-    ]
+  "javascript": [
+    "~/App_Plugins/MediaInfo/js/main.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/MediaInfo/css/style.css"
+  ]
 }

@@ -5,14 +5,16 @@
     <Product>MediaInfo</Product>
     <PackageId>MediaInfo</PackageId>
     <Title>MediaInfo</Title>
-    <Description>...</Description>
+    <Description>Updated to support .Net core 6.0</Description>
     <PackageTags>umbraco plugin package</PackageTags>
+    <Version>10.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MetadataExtractor" Version="2.7.2" />
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
+    <PackageReference Include="Umbraco.StorageProviders.AzureBlob" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
