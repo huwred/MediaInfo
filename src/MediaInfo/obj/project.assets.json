@@ -11649,7 +11649,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "10.0.2",
+    "version": "10.0.0",
     "restore": {
       "projectUniqueName": "E:\\GitHub\\MediaInfo\\src\\MediaInfo\\MediaInfo.csproj",
       "projectName": "MediaInfo",

@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>MediaInfo</id>
-    <version>1.0.1</version>
+    <version>10.0.0</version>
     <title>Media Info Content App</title>
-    <authors>Paul Seal</authors>
+    <authors>Paul Seal, Huw Reddick</authors>
     <owners>Paul Seal</owners>
     <licenseUrl>https://github.com/prjseal/MediaInfo/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/prjseal/MediaInfo</projectUrl>
@@ -13,6 +13,8 @@
     <description>A Content App for Umbraco which lets you see the meta data of your file such as GPS and Camera details.</description>
     <releaseNotes>
       - Updated content app permissions and removed geopoint
+      - Updated coe to .Net Core 6
+      - Added support for Azure Blob Storage
     </releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Umbraco Content App GPS camera picture photo metadata v8 package library</tags>

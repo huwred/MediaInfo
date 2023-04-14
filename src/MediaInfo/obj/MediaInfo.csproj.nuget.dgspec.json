@@ -5,7 +5,7 @@
   },
   "projects": {
     "E:\\GitHub\\MediaInfo\\src\\MediaInfo\\MediaInfo.csproj": {
-      "version": "10.0.2",
+      "version": "10.0.0",
       "restore": {
         "projectUniqueName": "E:\\GitHub\\MediaInfo\\src\\MediaInfo\\MediaInfo.csproj",
         "projectName": "MediaInfo",
